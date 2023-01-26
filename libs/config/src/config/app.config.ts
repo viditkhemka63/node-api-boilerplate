@@ -4,7 +4,7 @@ import ms from 'ms';
 export default registerAs(
   'app',
   (): Record<string, any> => ({
-    name: process.env.APP_NAME || 'saas',
+    name: process.env.APP_NAME || 'api',
     env: process.env.APP_ENV || 'development',
     mode: process.env.APP_MODE || 'simple',
     language: process.env.APP_LANGUAGE || 'en',
