@@ -1,0 +1,55 @@
+# For more information see:
+# - https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
+# - https://docs.github.com/en/actions/creating-actions/metadata-syntax-for-github-actions#outputsoutput_id
+
+# The action can be referenced in workflows like:
+# uses: ./.github/actions/check-changes
+
+name: check-changes
+description: Detect repository changes using Git.
+
+inputs:
+  premerge:
+    description: Indicates whether the git change detection should work versus one previous commit or origin/main.
+  trunk:
+    description: Trunk (default branch) name.
+    required: true
+    default: 'main'
+outputs:
+  changes:
+    description: JSON array with names of all filters matching any of changed files
+    value: ${{ steps.check-changes.outputs.changes }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Changes
+      id: check-changes
+      shell: bash
+      run: npx nx run tools:action-changes
+      env:
+        PREMERGE: ${{ inputs.premerge }}
+        TRUNK: ${{ inputs.trunk }}
+
+    - name: Print changes
+      shell: bash
+      run: |
+        echo "### :rocket: Changes" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- DEPENDENCIES: $DEPENDENCIES" >> $GITHUB_STEP_SUMMARY
+        echo "- ELECTRON: $ELECTRON" >> $GITHUB_STEP_SUMMARY
+        echo "- MOBILE: $MOBILE" >> $GITHUB_STEP_SUMMARY
+        echo "- PACKAGE_D3_CHARTS: $PACKAGE_D3_CHARTS" >> $GITHUB_STEP_SUMMARY
+        echo "- PACKAGE_ELIZA: $PACKAGE_ELIZA" >> $GITHUB_STEP_SUMMARY
+        echo "- SHELLTOOLS: $SHELLTOOLS" >> $GITHUB_STEP_SUMMARY
+        echo "- SRC: $SRC" >> $GITHUB_STEP_SUMMARY
+        echo "- STORYBOOK: $STORYBOOK" >> $GITHUB_STEP_SUMMARY
+      env:
+        DEPENDENCIES: ${{ fromJSON(steps.check-changes.outputs.changes).dependencies }}
+        ELECTRON: ${{ fromJSON(steps.check-changes.outputs.changes).electron }}
+        MOBILE: ${{ fromJSON(steps.check-changes.outputs.changes).mobile }}
+        PACKAGE_D3_CHARTS: ${{ fromJSON(steps.check-changes.outputs.changes).package-d3-charts }}
+        PACKAGE_ELIZA: ${{ fromJSON(steps.check-changes.outputs.changes).package-eliza }}
+        SHELLTOOLS: ${{ fromJSON(steps.check-changes.outputs.changes).shelltools }}
+        SRC: ${{ fromJSON(steps.check-changes.outputs.changes).src }}
+        STORYBOOK: ${{ fromJSON(steps.check-changes.outputs.changes).storybook }}
