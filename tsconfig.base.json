@@ -15,9 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@api-boilerplate/mailer": ["libs/mailer/src/index.ts"],
+      "@api/*": ["apps/api/src/*"],
       "@config": ["libs/config/src/index.ts"],
       "@core/*": ["libs/core/src/*"],
-      "@api/*": ["apps/api/src/*"]
+      "@libs/*": ["libs/*"]
+
     }
   },
   "exclude": ["node_modules", "tmp"]
