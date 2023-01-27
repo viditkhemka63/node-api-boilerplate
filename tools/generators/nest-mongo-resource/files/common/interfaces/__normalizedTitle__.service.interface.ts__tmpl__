@@ -1,0 +1,40 @@
+import {
+  IDatabaseCreateOptions,
+  IDatabaseFindOneOptions,
+  IDatabaseOptions,
+} from '@api/common/interfaces/database.interface';
+import { <%= pascalCaseName %>CreateDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.create.dto';
+import { <%= pascalCaseName %>UpdateDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.update.dto';
+import { <%= pascalCaseName %>Document } from '@api/modules/<%= normalizedTitle %>/schemas/<%= normalizedTitle %>.schema';
+import { <%= pascalCaseName %>ListDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.list.dto';
+import { IResponsePaging } from '@api/common/interfaces/response.interface';
+
+export interface I<%= pascalCaseName %>Service {
+  
+  findOneById(
+    _id: string,
+    options?: IDatabaseFindOneOptions
+  ): Promise<<%= pascalCaseName %>Document>;
+
+  findAndCountAll(query: <%= pascalCaseName %>ListDto): Promise<IResponsePaging>;
+  
+  findOne(
+    find: Record<string, any>,
+    options?: IDatabaseFindOneOptions
+  ): Promise<<%= pascalCaseName %>Document>;
+  
+  delete(
+    id: string,
+  ): Promise<<%= pascalCaseName %>Document>;
+
+  create(
+    data: <%= pascalCaseName %>CreateDto,
+    options?: IDatabaseCreateOptions
+  ): Promise<<%= pascalCaseName %>Document>;
+
+  update(
+    _id: string,
+    data: <%= pascalCaseName %>UpdateDto,
+    options?: IDatabaseOptions
+  ): Promise<<%= pascalCaseName %>Document>;
+}

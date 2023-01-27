@@ -1,0 +1,27 @@
+import {
+  IDatabaseCreateManyOptions,
+  IDatabaseManyOptions,
+} from '@api/database/interface/database.interface';
+import { Injectable } from '@nestjs/common';
+import {  <%= pascalCaseName %>CreateDto } from '../common/dto/<%= normalizedTitle %>.create.dto';
+import { I<%= pascalCaseName %>BulkService } from '../common/interfaces/<%= normalizedTitle %>.bulk-service.interface';
+import {  <%= pascalCaseName %>BulkRepository } from './<%= normalizedTitle %>.bulk.repository';
+
+@Injectable()
+export class  <%= pascalCaseName %>BulkService implements I<%= pascalCaseName %>BulkService {
+  constructor(private readonly <%= camelCaseName %>BulkRepository:  <%= pascalCaseName %>BulkRepository) {}
+
+  async deleteMany(
+    find: Record<string, any>,
+    options?: IDatabaseManyOptions
+  ): Promise<boolean> {
+    return this.<%= camelCaseName %>BulkRepository.deleteMany(find, options);
+  }
+
+  async createMany(
+    data:  <%= pascalCaseName %>CreateDto[],
+    options?: IDatabaseCreateManyOptions
+  ): Promise<boolean> {
+    return this.<%= camelCaseName %>BulkRepository.createMany< <%= pascalCaseName %>CreateDto>(data, options);
+  }
+}

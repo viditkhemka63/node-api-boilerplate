@@ -1,0 +1,41 @@
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, now } from 'mongoose';
+import { STATUS } from '@api/common/constants/common';
+
+@Schema({ timestamps: true, versionKey: false })
+export class <%= pascalCaseName %>Entity {
+    @Prop({
+        required: true,
+    })
+    name: string;
+
+    //   -------------------------------------------
+    //   ------------ common columns start ---------
+    //   -------------------------------------------
+
+    @Prop({
+        required: true,
+        type: String,
+        enum: STATUS,
+        default: STATUS['ACTIVE'],
+    })
+    status: STATUS;
+    
+    @Prop({ default: now() })
+    createdAt: Date;
+
+    @Prop({ default: now() })
+    updatedAt: Date;
+
+    @Prop()
+    deletedAt: Date;
+
+    //   -------------------------------------------
+    //   ------------ common columns end ---------
+    //   -------------------------------------------
+}
+
+export const <%= pascalCaseName %>DatabaseName = '<%= pascalCaseName %>';
+export const <%= pascalCaseName %>Schema = SchemaFactory.createForClass(<%= pascalCaseName %>Entity);
+
+export type <%= pascalCaseName %>Document = <%= pascalCaseName %>Entity & Document;

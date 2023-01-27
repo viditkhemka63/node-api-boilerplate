@@ -138,4 +138,4 @@ Run `nx graph` to see a diagram of the dependencies of your projects.
 
 ### Nx create generator
 
-Run `npx nx generate @nrwl/workspace:lib --name=markdown`
+Run `nx g @nrwl/workspace:workspace-generator --name=markdown`

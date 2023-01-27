@@ -1,0 +1,4 @@
+import { PickType } from '@nestjs/swagger';
+import { <%= pascalCaseName %>CreateDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.create.dto';
+
+export class <%= pascalCaseName %>UpdateDto extends <%= pascalCaseName %>CreateDto {}

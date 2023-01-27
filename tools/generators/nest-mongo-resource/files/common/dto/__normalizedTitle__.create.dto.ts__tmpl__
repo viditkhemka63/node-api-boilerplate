@@ -1,0 +1,14 @@
+import { faker } from '@faker-js/faker';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsString, IsNotEmpty } from 'class-validator';
+
+export class <%= pascalCaseName %>CreateDto {
+    @ApiProperty({
+        description: 'Alias name of permission',
+        example: faker.name.jobDescriptor(),
+        required: true,
+    })
+    @IsString()
+    @IsNotEmpty()
+    readonly name: string;
+}

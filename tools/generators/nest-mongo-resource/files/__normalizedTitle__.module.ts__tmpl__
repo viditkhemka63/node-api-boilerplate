@@ -1,0 +1,54 @@
+import { Module } from '@nestjs/common';
+import { <%= pascalCaseName %>Service } from './services/<%= normalizedTitle %>.service';
+import { <%= pascalCaseName %>Controller } from './controllers/<%= normalizedTitle %>.controller';
+import { <%= pascalCaseName %>BulkService } from './services/<%= normalizedTitle %>.bulk.service';
+import { <%= pascalCaseName %>Repository } from './services/<%= normalizedTitle %>.repository';
+import { <%= pascalCaseName %>BulkRepository } from './services/<%= normalizedTitle %>.bulk.repository';
+
+import { MongooseModule } from '@nestjs/mongoose';
+import {
+  <%= pascalCaseName %>DatabaseName,
+  <%= pascalCaseName %>Entity,
+  <%= pascalCaseName %>Schema,
+} from './schemas/<%= normalizedTitle %>.schema';
+import {
+  <%= upperCase %>_SERVICE,
+  <%= upperCase %>_BULK_SERVICE
+} from '@api/modules/<%= normalizedTitle %>/common/constants/<%= normalizedTitle %>.list.constant';
+
+
+@Module({
+  providers: [
+    <%= pascalCaseName %>Repository,
+    <%= pascalCaseName %>BulkRepository,
+    {
+      provide: <%= upperCase %>_SERVICE,
+      useClass: <%= pascalCaseName %>Service
+    },
+    {
+      provide: <%= upperCase %>_BULK_SERVICE,
+      useClass: <%= pascalCaseName %>BulkService,
+    },
+  ],
+  exports: [
+    {
+      provide: <%= upperCase %>_SERVICE,
+      useClass: <%= pascalCaseName %>Service
+    },
+    {
+      provide: <%= upperCase %>_BULK_SERVICE,
+      useClass: <%= pascalCaseName %>BulkService,
+    },
+  ],
+  controllers: [<%= pascalCaseName %>Controller],
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: <%= pascalCaseName %>Entity.name,
+        schema: <%= pascalCaseName %>Schema,
+        collection: <%= pascalCaseName %>DatabaseName,
+      },
+    ]),
+  ],
+})
+export class <%= pascalCaseName %>Module {}

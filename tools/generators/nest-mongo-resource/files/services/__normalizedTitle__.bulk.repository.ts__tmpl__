@@ -1,0 +1,19 @@
+import { IDatabaseBulkRepositoryAbstract } from '@api/common/interfaces/database.bulk.repository.interface';
+import { DatabaseMongoBulkRepositoryAbstract } from '@api/database/abstracts/database.mongo-bulk-repository.abstract';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import {  <%= pascalCaseName %>Document,  <%= pascalCaseName %>Entity } from '../schemas/<%= normalizedTitle %>.schema';
+
+@Injectable()
+export class  <%= pascalCaseName %>BulkRepository
+  extends DatabaseMongoBulkRepositoryAbstract< <%= pascalCaseName %>Document>
+  implements IDatabaseBulkRepositoryAbstract
+{
+  constructor(
+    @InjectModel( <%= pascalCaseName %>Entity.name)
+    private readonly  <%= pascalCaseName %>Model: Model< <%= pascalCaseName %>Document>
+  ) {
+    super( <%= pascalCaseName %>Model);
+  }
+}

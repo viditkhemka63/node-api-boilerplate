@@ -1,0 +1,6 @@
+import { PartialType } from '@nestjs/swagger';
+import { <%= pascalCaseName %>GetSerialization } from './<%= normalizedTitle %>.get.serialization';
+
+export class <%= pascalCaseName %>ListSerialization extends PartialType(
+    <%= pascalCaseName %>GetSerialization
+) {}

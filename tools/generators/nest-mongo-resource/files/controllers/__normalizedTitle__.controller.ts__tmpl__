@@ -1,0 +1,87 @@
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Put,
+  Query,
+  Post,
+  Delete,
+  Inject,
+} from '@nestjs/common';
+import { <%= pascalCaseName %>ListDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.list.dto';
+import {
+  IResponse,
+  IResponsePaging,
+} from '@api/common/interfaces/response.interface';
+import { <%= pascalCaseName %>Service } from '@api/modules/<%= normalizedTitle %>/services/<%= normalizedTitle %>.service';
+import { <%= pascalCaseName %>UpdateDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.update.dto';
+import { <%= pascalCaseName %>CreateDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.create.dto';
+import {
+  <%= pascalCaseName %>ListDoc,
+  <%= pascalCaseName %>UpdateDoc,
+  <%= pascalCaseName %>GetDoc,
+  <%= pascalCaseName %>CreateDoc,
+  <%= pascalCaseName %>DeleteDoc
+} from '@api/modules/<%= normalizedTitle %>/common/docs/<%= normalizedTitle %>.doc';
+import {
+  <%= upperCase %>_SERVICE,
+} from '@api/modules/<%= normalizedTitle %>/common/constants/<%= normalizedTitle %>.list.constant';
+import { I<%= pascalCaseName %>Service } from '@api/modules/<%= normalizedTitle %>/common/interfaces/<%= normalizedTitle %>.service.interface';
+import { <%= pascalCaseName %>Document } from '@api/modules/<%= normalizedTitle %>/schemas/<%= normalizedTitle %>.schema';
+import { ApiBearerAuth, ApiHeader, ApiTags } from '@nestjs/swagger';
+
+const routeName = '<%= normalizedTitle %>';
+
+@ApiHeader({
+  name: 'Workspace',
+  description: 'user workspace',
+  required: false,
+})
+@ApiBearerAuth('token')
+@ApiTags(routeName)
+@Controller(routeName)
+export class <%= pascalCaseName %>Controller {
+  constructor(
+    @Inject(<%= upperCase %>_SERVICE)
+    private readonly <%= camelCaseName %>Service: I<%= pascalCaseName %>Service
+  ) {}
+
+  @<%= pascalCaseName %>ListDoc()
+  @Get('/list')
+  async list(
+    @Query()
+    <%= camelCaseName %>ListDto: <%= pascalCaseName %>ListDto
+  ): Promise<IResponsePaging> {
+    return this.<%= camelCaseName %>Service.findAndCountAll(<%= camelCaseName %>ListDto);
+  }
+
+  @<%= pascalCaseName %>GetDoc()
+  @Get(':id')
+  async findById(@Param('id') id: string): Promise<<%= pascalCaseName %>Document> {
+    return this.<%= camelCaseName %>Service.findOneById(id);
+  }
+
+  @<%= pascalCaseName %>CreateDoc()
+  @Post()
+  async create(
+    @Body() <%= camelCaseName %>CreateDto: <%= pascalCaseName %>CreateDto
+  ): Promise<<%= pascalCaseName %>Document> {
+    return this.<%= camelCaseName %>Service.create(<%= camelCaseName %>CreateDto);
+  }
+
+  @<%= pascalCaseName %>UpdateDoc()
+  @Put(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() body: <%= pascalCaseName %>UpdateDto
+  ): Promise<<%= pascalCaseName %>Document> {
+    return await this.<%= camelCaseName %>Service.update(id, body);
+  }
+
+  @<%= pascalCaseName %>DeleteDoc()
+  @Delete(':id')
+  delete(@Param('id') id: string) {
+    return this.<%= camelCaseName %>Service.delete(id);
+  }
+}

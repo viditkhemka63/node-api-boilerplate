@@ -1,0 +1,22 @@
+import { DatabaseMongoRepositoryAbstract } from '@api/database/abstracts/database.mongo-repository.abstract';
+import { IDatabaseRepositoryAbstract } from '@api/common/interfaces/database.repository.interface';
+import { Injectable } from '@nestjs/common';
+import { Model } from 'mongoose';
+import {
+  <%= pascalCaseName %>Document,
+  <%= pascalCaseName %>Entity,
+} from '../schemas/<%= normalizedTitle %>.schema';
+import { InjectModel } from '@nestjs/mongoose';
+
+@Injectable()
+export class <%= pascalCaseName %>Repository
+  extends DatabaseMongoRepositoryAbstract<<%= pascalCaseName %>Document>
+  implements IDatabaseRepositoryAbstract<<%= pascalCaseName %>Document>
+{
+  constructor(
+    @InjectModel(<%= pascalCaseName %>Entity.name)
+    private readonly <%= camelCaseName %>Model: Model<<%= pascalCaseName %>Document>
+  ) {
+    super(<%= camelCaseName %>Model);
+  }
+}

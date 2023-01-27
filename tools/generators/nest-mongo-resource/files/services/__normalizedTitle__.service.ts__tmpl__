@@ -1,0 +1,108 @@
+import { Injectable } from '@nestjs/common';
+import { <%= pascalCaseName %>Repository } from '@api/modules/<%= normalizedTitle %>/services/<%= normalizedTitle %>.repository';
+import {
+  IDatabaseCreateOptions,
+  IDatabaseFindOneOptions,
+  IDatabaseOptions,
+} from '@api/database/interface/database.interface';
+import {
+  <%= pascalCaseName %>Document,
+} from '../schemas/<%= normalizedTitle %>.schema';
+import { <%= pascalCaseName %>UpdateDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.update.dto';
+import { <%= pascalCaseName %>CreateDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.create.dto';
+import { PaginationService } from '@api-core/pagination/service/pagination.service';
+import { <%= pascalCaseName %>ListDto } from '@api/modules/<%= normalizedTitle %>/common/dto/<%= normalizedTitle %>.list.dto';
+import { I<%= pascalCaseName %>Service } from '@api/modules/<%= normalizedTitle %>/common/interfaces/<%= normalizedTitle %>.service.interface';
+import { IResponsePaging } from '@api/common/interfaces/response.interface';
+
+@Injectable()
+export class <%= pascalCaseName %>Service implements I<%= pascalCaseName %>Service {
+  constructor(
+    private readonly <%= camelCaseName %>Repository: <%= pascalCaseName %>Repository,
+    private readonly paginationService: PaginationService
+  ) {}
+
+  async findAndCountAll({
+    page,
+    perPage,
+    sort,
+    search,
+    availableSort,
+    availableSearch,
+    isActive,
+  }: <%= pascalCaseName %>ListDto): Promise<IResponsePaging> {
+    const skip: number = await this.paginationService.skip(page, perPage);
+    const find: Record<string, any> = {
+      isActive: {
+        $in: isActive,
+      },
+      ...search,
+    };
+
+    const <%= camelCaseName %>s: <%= pascalCaseName %>Document[] = await this.<%= camelCaseName %>Repository.findAll<<%= pascalCaseName %>Document>(find, {
+      skip: skip,
+      limit: perPage,
+      sort,
+    });
+
+    const totalData: number = await this.<%= camelCaseName %>Repository.getTotal(find);
+    const totalPage: number = await this.paginationService.totalPage(
+      totalData,
+      perPage
+    );
+
+    return {
+      totalData,
+      totalPage,
+      currentPage: page,
+      perPage,
+      availableSearch,
+      availableSort,
+      data: <%= camelCaseName %>s,
+    };
+  }
+
+  async findOneById(
+    _id: string,
+    options?: IDatabaseFindOneOptions
+  ): Promise<<%= pascalCaseName %>Document> {
+    return this.<%= camelCaseName %>Repository.findOneById<<%= pascalCaseName %>Document>(
+      _id,
+      options
+    );
+  }
+
+  async findOne(
+    find: Record<string, any>,
+    options?: IDatabaseFindOneOptions
+  ): Promise<<%= pascalCaseName %>Document> {
+    return this.<%= camelCaseName %>Repository.findOne<<%= pascalCaseName %>Document>(find, options);
+  }
+
+  async delete(id: string): Promise<<%= pascalCaseName %>Document> {
+    return this.<%= camelCaseName %>Repository.deleteOneById(id);
+  }
+
+  async create(
+    data: <%= pascalCaseName %>CreateDto,
+    options?: IDatabaseCreateOptions
+  ): Promise<<%= pascalCaseName %>Document> {
+    const create = {
+      ...data,
+    };
+
+    return this.<%= camelCaseName %>Repository.create(create, options);
+  }
+
+  async update(
+    _id: string,
+    data: <%= pascalCaseName %>UpdateDto,
+    options?: IDatabaseOptions
+  ): Promise<<%= pascalCaseName %>Document> {
+    return this.<%= camelCaseName %>Repository.updateOneById<<%= pascalCaseName %>UpdateDto>(
+      _id,
+      data,
+      options
+    );
+  }
+}

@@ -1,0 +1,9 @@
+export const <%= upperCase %>_DEFAULT_SORT = 'createdAt@asc';
+export const <%= upperCase %>_DEFAULT_PAGE = 1;
+export const <%= upperCase %>_DEFAULT_PER_PAGE = 20;
+export const <%= upperCase %>_DEFAULT_AVAILABLE_SORT = ['name', 'createdAt'];
+export const <%= upperCase %>_DEFAULT_AVAILABLE_SEARCH = ['name'];
+export const <%= upperCase %>_DEFAULT_ACTIVE = [true, false];
+
+export const <%= upperCase %>_SERVICE = '<%= upperCase %>_SERVICE';
+export const <%= upperCase %>_BULK_SERVICE = '<%= upperCase %>_BULK_SERVICE';

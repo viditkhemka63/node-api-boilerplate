@@ -1,0 +1,45 @@
+import { ApiHideProperty } from '@nestjs/swagger';
+import { PaginationListAbstract } from '@api-core/pagination/abstracts/pagination.abstract';
+import {
+  PaginationAvailableSearch,
+  PaginationAvailableSort,
+  PaginationFilterBoolean,
+  PaginationPage,
+  PaginationPerPage,
+  PaginationSearch,
+  PaginationSort,
+} from '@api-core/pagination/decorators/pagination.decorator';
+import { IPaginationSort } from '@api-core/pagination/interfaces/pagination.interface';
+import {
+  <%= upperCase %>_DEFAULT_ACTIVE,
+  <%= upperCase %>_DEFAULT_AVAILABLE_SEARCH,
+  <%= upperCase %>_DEFAULT_AVAILABLE_SORT,
+  <%= upperCase %>_DEFAULT_PAGE,
+  <%= upperCase %>_DEFAULT_PER_PAGE,
+  <%= upperCase %>_DEFAULT_SORT,
+} from '@api/modules/<%= normalizedTitle %>/common/constants/<%= normalizedTitle %>.list.constant';
+
+export class <%= pascalCaseName %>ListDto implements PaginationListAbstract {
+  @PaginationSearch(<%= upperCase %>_DEFAULT_AVAILABLE_SEARCH)
+  readonly search: Record<string, any>;
+
+  @ApiHideProperty()
+  @PaginationAvailableSearch(<%= upperCase %>_DEFAULT_AVAILABLE_SEARCH)
+  readonly availableSearch: string[];
+
+  @PaginationPage(<%= upperCase %>_DEFAULT_PAGE)
+  readonly page: number;
+
+  @PaginationPerPage(<%= upperCase %>_DEFAULT_PER_PAGE)
+  readonly perPage: number;
+
+  @PaginationSort(<%= upperCase %>_DEFAULT_SORT, <%= upperCase %>_DEFAULT_AVAILABLE_SORT)
+  readonly sort: IPaginationSort;
+
+  @ApiHideProperty()
+  @PaginationAvailableSort(<%= upperCase %>_DEFAULT_AVAILABLE_SORT)
+  readonly availableSort: string[];
+
+  @PaginationFilterBoolean(<%= upperCase %>_DEFAULT_ACTIVE)
+  readonly isActive: boolean[];
+}

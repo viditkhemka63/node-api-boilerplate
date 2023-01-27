@@ -1,0 +1,100 @@
+import { applyDecorators } from '@nestjs/common';
+import { Doc, DocPaging } from '@api/common/decorators/doc.decorator';
+import {
+  <%= pascalCaseName %>DocParamsGet,
+  <%= pascalCaseName %>DocQueryList,
+} from '@api/modules/<%= normalizedTitle %>/common/constants/<%= normalizedTitle %>.doc.constant';
+import {
+  <%= upperCase %>_DEFAULT_AVAILABLE_SORT,
+  <%= upperCase %>_DEFAULT_SORT,
+} from '@api/modules/<%= normalizedTitle %>/common/constants/<%= normalizedTitle %>.list.constant';
+import { <%= pascalCaseName %>GetSerialization } from './<%= normalizedTitle %>.get.serialization';
+import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { <%= pascalCaseName %>ListSerialization } from './<%= normalizedTitle %>.list.serialization';
+import { <%= upperCase %>_DEFAULT_AVAILABLE_SEARCH } from './../constants/<%= normalizedTitle %>.list.constant';
+
+export class ResponseIdSerialization {
+  @ApiProperty({
+    description: 'Id that representative with your target data',
+    example: '631d9f32a65cf07250b8938c',
+    required: true,
+  })
+  @Type(() => String)
+  _id: string;
+}
+
+export function <%= pascalCaseName %>ListDoc(): any {
+  return applyDecorators(
+    DocPaging<<%= pascalCaseName %>ListSerialization>('<%= normalizedTitle %>.list', {
+      auth: {
+        jwtAccessToken: true,
+      },
+      request: {
+        queries: <%= pascalCaseName %>DocQueryList,
+      },
+      response: {
+        classSerialization: <%= pascalCaseName %>ListSerialization,
+        availableSort: <%= upperCase %>_DEFAULT_AVAILABLE_SORT,
+        availableSearch: <%= upperCase %>_DEFAULT_AVAILABLE_SEARCH,
+      },
+    })
+  );
+}
+
+export function <%= pascalCaseName %>GetDoc(): any {
+  return applyDecorators(
+    Doc<<%= pascalCaseName %>GetSerialization>('<%= normalizedTitle %>.get', {
+      auth: {
+        jwtAccessToken: true,
+      },
+      request: {
+        params: <%= pascalCaseName %>DocParamsGet,
+      },
+      response: { classSerialization: <%= pascalCaseName %>GetSerialization },
+    })
+  );
+}
+
+export function <%= pascalCaseName %>CreateDoc(): any {
+  return applyDecorators(
+    Doc<<%= pascalCaseName %>GetSerialization>('<%= normalizedTitle %>.post', {
+      auth: {
+        jwtAccessToken: true,
+        apiKey: true,
+      },
+      request: {
+        params: <%= pascalCaseName %>DocParamsGet,
+      },
+      response: { classSerialization: <%= pascalCaseName %>GetSerialization },
+    })
+  );
+}
+
+export function <%= pascalCaseName %>UpdateDoc(): any {
+  return applyDecorators(
+    Doc<ResponseIdSerialization>('<%= normalizedTitle %>.put', {
+      auth: {
+        jwtAccessToken: true,
+      },
+      request: {
+        params: <%= pascalCaseName %>DocParamsGet,
+      },
+      response: { classSerialization: ResponseIdSerialization },
+    })
+  );
+}
+
+export function <%= pascalCaseName %>DeleteDoc(): any {
+  return applyDecorators(
+    Doc<ResponseIdSerialization>('<%= normalizedTitle %>.delete', {
+      auth: {
+        jwtAccessToken: true,
+      },
+      request: {
+        params: <%= pascalCaseName %>DocParamsGet,
+      },
+      response: { classSerialization: <%= pascalCaseName %>GetSerialization },
+    })
+  );
+}
