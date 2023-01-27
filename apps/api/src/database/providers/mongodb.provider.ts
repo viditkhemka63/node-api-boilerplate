@@ -2,7 +2,7 @@ import { MongoDBConfig } from './../mongodb.config';
 export const LOCAL_DB_CONNECTION_STRING = 'mongodb://localhost:27017/ai';
 import { DEVELOPMENT, PRODUCTION, TEST } from '@api/common/constants/common';
 
-export const mongoDBProvider = () => {
+export const mongoDBProvider = (): string => {
   switch (process.env.NODE_ENV) {
     case DEVELOPMENT:
       return MongoDBConfig.development.uri;
@@ -14,6 +14,6 @@ export const mongoDBProvider = () => {
       return MongoDBConfig.production.uri;
 
     default:
-      return MongoDBConfig.development;
+      return MongoDBConfig.development.uri;
   }
 };
