@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, now, Types } from 'mongoose';
 import { INVITATION_STATUS, STATUS } from '@api/common/constants/common';
-import { UserRoleEntity } from '@api/modules/user-role/schemas/user-role.schema';
+import { UserRoleEntity } from '@api/modules/user-role/models/user-role.schema';
 import { WorkspaceEntity } from './workspace.schema';
 
 @Schema({ timestamps: true, versionKey: false })

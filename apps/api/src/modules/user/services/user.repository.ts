@@ -2,7 +2,7 @@ import { DatabaseMongoRepositoryAbstract } from '@api/database/abstracts/databas
 import { IDatabaseRepositoryAbstract } from '@api/common/interfaces/database.repository.interface';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { UserDocument, UserEntity } from '../schemas/user.schema';
+import { UserDocument, UserEntity } from '../models/user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()

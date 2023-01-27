@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, now, Types } from 'mongoose';
 import { STATUS } from '@api/common/constants/common';
-import { PermissionEntity } from '@api/modules/permission/schemas/permission.schema';
+import { PermissionEntity } from '@api/modules/permission/models/permission.schema';
 
 @Schema({ timestamps: true, versionKey: false })
 export class UserRoleEntity {
@@ -11,6 +11,11 @@ export class UserRoleEntity {
     index: true,
   })
   name: string;
+
+  @Prop({
+    required: true,
+  })
+  description: string;
 
   @Prop({
     required: true,

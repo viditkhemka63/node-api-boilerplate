@@ -5,7 +5,7 @@ import {
   IDatabaseFindOneOptions,
   IDatabaseOptions,
 } from '@api/database/interface/database.interface';
-import { UserDocument } from '../schemas/user.schema';
+import { UserDocument } from '../models/user.schema';
 import { UserUpdateDto } from '@api/modules/user/common/dto/user.update.dto';
 import { UserCreateDto } from '@api/modules/user/common/dto/user.create.dto';
 import { PaginationService } from '@core/pagination/service/pagination.service';

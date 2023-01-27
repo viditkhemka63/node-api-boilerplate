@@ -62,7 +62,16 @@ export function PaginationPage(page = PAGINATION_PAGE): any {
     Expose(),
     Type(() => Number),
     Transform(({ value }) => {
-      console.log('File page decorator', page, value);
+      console.log(
+        'File page decorator',
+        page,
+        value,
+        !value
+          ? page
+          : value > PAGINATION_MAX_PAGE
+          ? PAGINATION_MAX_PAGE
+          : value
+      );
       return !value
         ? page
         : value > PAGINATION_MAX_PAGE
@@ -130,6 +139,13 @@ export function PaginationFilterBoolean(defaultValue: boolean[]): any {
         ? value.split(',').map((val: string) => (val === 'true' ? true : false))
         : defaultValue
     )
+  );
+}
+
+export function PaginationStatusFilter(defaultValue: string): any {
+  return applyDecorators(
+    Expose(),
+    Transform(({ value }) => (value ? value : defaultValue))
   );
 }
 

@@ -3,7 +3,7 @@ import { DatabaseMongoBulkRepositoryAbstract } from '@api/database/abstracts/dat
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UserRoleDocument, UserRoleEntity } from '../schemas/user-role.schema';
+import { UserRoleDocument, UserRoleEntity } from '../models/user-role.schema';
 
 @Injectable()
 export class UserRoleBulkRepository

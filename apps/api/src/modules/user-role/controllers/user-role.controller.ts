@@ -24,7 +24,7 @@ import {
 } from '@api/modules/user-role/common/docs/user-role.doc';
 import { USER_ROLE_SERVICE } from '@api/modules/user-role/common/constants/user-role.list.constant';
 import { IUserRoleService } from '@api/modules/user-role/common/interfaces/user-role.service.interface';
-import { UserRoleDocument } from '@api/modules/user-role/schemas/user-role.schema';
+import { UserRoleDocument } from '@api/modules/user-role/models/user-role.schema';
 import { ApiTags } from '@nestjs/swagger';
 
 const routeName = 'user-role';

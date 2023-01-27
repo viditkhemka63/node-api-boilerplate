@@ -5,7 +5,7 @@ import { Model } from 'mongoose';
 import {
   PermissionDocument,
   PermissionEntity,
-} from '../schemas/permission.schema';
+} from '../models/permission.schema';
 import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()

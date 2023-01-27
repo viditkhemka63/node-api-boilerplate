@@ -17,7 +17,7 @@ import {
   IResponse,
   IResponsePaging,
 } from '@api/common/interfaces/response.interface';
-import { PermissionDocument } from '@api/modules/permission/schemas/permission.schema';
+import { PermissionDocument } from '@api/modules/permission/models/permission.schema';
 import { PermissionUpdateDto } from '@api/modules/permission/common/dto/permission.update.dto';
 import {
   PermissionActiveDoc,
@@ -27,6 +27,7 @@ import {
 import { PERMISSION_SERVICE } from '../common/constants/permission.list.constant';
 import { IPermissionService } from '../common/interfaces/permission.service.interface';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { Public } from '@api/common/decorators/public.decorator';
 
 @Controller('permission')
 export class PermissionController {
@@ -36,7 +37,8 @@ export class PermissionController {
   ) {}
 
   // @PermissionListDoc()
-  @ApiBearerAuth()
+  // @ApiBearerAuth()
+  @Public()
   @Get('/list')
   @UsePipes(new ValidationPipe({ transform: true }))
   async list(

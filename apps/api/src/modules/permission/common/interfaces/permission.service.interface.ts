@@ -8,47 +8,38 @@ import {
 import { IResponsePaging } from '@api/common/interfaces/response.interface';
 import { PermissionCreateDto } from '@api/modules/permission/common/dto/permission.create.dto';
 import { PermissionUpdateDto } from '@api/modules/permission/common/dto/permission.update.dto';
-import { PermissionDocument } from '@api/modules/permission/schemas/permission.schema';
+import { PermissionDocument } from '@api/modules/permission/models/permission.schema';
 import { PermissionListDto } from '../dto/permission.list.dto';
 
 export interface IPermissionService {
   findAndCountAll(query: PermissionListDto): Promise<IResponsePaging>;
 
-  findOneById(
-    _id: string,
-    options?: IDatabaseFindOneOptions
-  ): Promise<PermissionDocument>;
+  findOneById(_id: string, options?: IDatabaseFindOneOptions): Promise<any>;
 
-  findAll(
-    find: any,
-    options?: IDatabaseFindAllOptions
-  ): Promise<PermissionDocument[]>;
+  findAll(find: any, options?: IDatabaseFindAllOptions): Promise<any[]>;
 
   findOne(
     find: Record<string, any>,
     options?: IDatabaseFindOneOptions
-  ): Promise<PermissionDocument>;
+  ): Promise<any>;
 
   deleteOne(
     find: Record<string, any>,
     options?: IDatabaseSoftDeleteOptions
-  ): Promise<PermissionDocument>;
+  ): Promise<any>;
 
   create(
     data: PermissionCreateDto,
     options?: IDatabaseCreateOptions
-  ): Promise<PermissionDocument>;
+  ): Promise<any>;
 
   update(
     _id: string,
     data: PermissionUpdateDto,
     options?: IDatabaseOptions
-  ): Promise<PermissionDocument>;
+  ): Promise<any>;
 
-  inactive(
-    _id: string,
-    options?: IDatabaseOptions
-  ): Promise<PermissionDocument>;
+  inactive(_id: string, options?: IDatabaseOptions): Promise<any>;
 
-  active(_id: string, options?: IDatabaseOptions): Promise<PermissionDocument>;
+  active(_id: string, options?: IDatabaseOptions): Promise<any>;
 }

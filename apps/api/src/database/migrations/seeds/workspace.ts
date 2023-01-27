@@ -13,10 +13,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IWorkspaceUsersService } from '@api/modules/workspace/common/interfaces/workspace-users.service.interface';
 import { USER_ROLE_SERVICE } from '@api/modules/user-role/common/constants/user-role.list.constant';
 import { IUserRoleService } from '@api/modules/user-role/common/interfaces/user-role.service.interface';
-import { UserRoleDocument } from '@api/modules/user-role/schemas/user-role.schema';
+import { UserRoleDocument } from '@api/modules/user-role/models/user-role.schema';
 import { USER_SERVICE } from '@api/modules/user/common/constants/user.list.constant';
 import { IUserService } from '@api/modules/user/common/interfaces/user.service.interface';
-import { UserDocument } from '@api/modules/user/schemas/user.schema';
+import { UserDocument } from '@api/modules/user/models/user.schema';
 
 @Injectable()
 export class WorkspaceSeed {

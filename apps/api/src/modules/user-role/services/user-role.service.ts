@@ -5,7 +5,7 @@ import {
   IDatabaseFindOneOptions,
   IDatabaseOptions,
 } from '@api/database/interface/database.interface';
-import { UserRoleDocument, UserRoleEntity } from '../schemas/user-role.schema';
+import { UserRoleDocument, UserRoleEntity } from '../models/user-role.schema';
 import { UserRoleUpdateDto } from '@api/modules/user-role/common/dto/user-role.update.dto';
 import { UserRoleCreateDto } from '@api/modules/user-role/common/dto/user-role.create.dto';
 import { PaginationService } from '@core/pagination/service/pagination.service';

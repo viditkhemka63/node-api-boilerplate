@@ -11,6 +11,7 @@ import {
 import { createNamespace } from 'cls-hooked';
 import { mongoDBProvider } from './mongodb.provider';
 import { SequelizeModuleOptions } from '@nestjs/sequelize';
+import { SequilizeModels } from './models';
 
 export const databaseProviders = {
   [SEQUELIZE]: (): Partial<SequelizeModuleOptions> => {
@@ -39,7 +40,7 @@ export const databaseProviders = {
       username: config.username || 'postgres',
       password: config.password,
       database: config.database || 'bizisell',
-      models: [],
+      models: SequilizeModels,
       autoLoadModels: true,
       // timestamps: true,
       // paranoid: true,

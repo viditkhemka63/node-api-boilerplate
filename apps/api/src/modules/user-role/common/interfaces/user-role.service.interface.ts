@@ -5,7 +5,7 @@ import {
 } from '@api/common/interfaces/database.interface';
 import { UserRoleCreateDto } from '@api/modules/user-role/common/dto/user-role.create.dto';
 import { UserRoleUpdateDto } from '@api/modules/user-role/common/dto/user-role.update.dto';
-import { UserRoleDocument } from '@api/modules/user-role/schemas/user-role.schema';
+import { UserRoleDocument } from '@api/modules/user-role/models/user-role.schema';
 import { UserRoleListDto } from '@api/modules/user-role/common/dto/user-role.list.dto';
 import { IResponsePaging } from '@api/common/interfaces/response.interface';
 

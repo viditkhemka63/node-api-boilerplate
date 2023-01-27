@@ -5,7 +5,7 @@ import {
 } from '@api/common/interfaces/database.interface';
 import { UserCreateDto } from '@api/modules/user/common/dto/user.create.dto';
 import { UserUpdateDto } from '@api/modules/user/common/dto/user.update.dto';
-import { UserDocument } from '@api/modules/user/schemas/user.schema';
+import { UserDocument } from '@api/modules/user/models/user.schema';
 import { UserListDto } from '@api/modules/user/common/dto/user.list.dto';
 import { IResponsePaging } from '@api/common/interfaces/response.interface';
 

@@ -7,13 +7,16 @@ import {
   UserRoleDatabaseName,
   UserRoleEntity,
   UserRoleSchema,
-} from './schemas/user-role.schema';
+} from './models/user-role.schema';
 import {
   USER_ROLE_SERVICE,
   USER_ROLE_BULK_SERVICE,
 } from '@api/modules/user-role/common/constants/user-role.list.constant';
 import { UserRoleBulkService } from './services/user-role.bulk.service';
 import { UserRoleBulkRepository } from './services/user-role.bulk.repository';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { UserRoleModel } from './models/user-role.model';
+import { UserRolePermissionMappingModel } from './models/user-role-permission-mapping.model';
 
 @Module({
   providers: [
@@ -40,6 +43,7 @@ import { UserRoleBulkRepository } from './services/user-role.bulk.repository';
   ],
   controllers: [UserRoleController],
   imports: [
+    SequelizeModule.forFeature([UserRoleModel, UserRolePermissionMappingModel]),
     MongooseModule.forFeature([
       {
         name: UserRoleEntity.name,

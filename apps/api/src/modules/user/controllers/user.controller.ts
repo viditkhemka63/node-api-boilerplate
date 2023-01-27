@@ -24,7 +24,7 @@ import {
 } from '@api/modules/user/common/docs/user.doc';
 import { USER_SERVICE } from '@api/modules/user/common/constants/user.list.constant';
 import { IUserService } from '@api/modules/user/common/interfaces/user.service.interface';
-import { UserDocument } from '@api/modules/user/schemas/user.schema';
+import { UserDocument } from '@api/modules/user/models/user.schema';
 import { ApiTags } from '@nestjs/swagger';
 
 const routeName = 'user';

@@ -1,7 +1,7 @@
 import { ENUM_AUTH_PERMISSIONS } from '@api/modules/auth/constants/auth.enum.permission.constant';
 import { PERMISSION_SERVICE } from '@api/modules/permission/common/constants/permission.list.constant';
 import { IPermissionService } from '@api/modules/permission/common/interfaces/permission.service.interface';
-import { PermissionDocument } from '@api/modules/permission/schemas/permission.schema';
+import { PermissionDocument } from '@api/modules/permission/models/permission.schema';
 import {
   USER_ROLE_BULK_SERVICE,
   USER_ROLE_SERVICE,

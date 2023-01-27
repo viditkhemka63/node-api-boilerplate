@@ -2,8 +2,8 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, now, Types } from 'mongoose';
 import { STATUS } from '@api/common/constants/common';
 import { WorkspaceEntity } from './workspace.schema';
-import { UserRoleEntity } from '@api/modules/user-role/schemas/user-role.schema';
-import { UserEntity } from '@api/modules/user/schemas/user.schema';
+import { UserRoleEntity } from '@api/modules/user-role/models/user-role.schema';
+import { UserEntity } from '@api/modules/user/models/user.schema';
 
 @Schema({ timestamps: true, versionKey: false })
 export class WorkspaceUsersEntity {

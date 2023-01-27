@@ -19,7 +19,7 @@ import { WorkspaceInvitationsCreateDto } from '../common/dto/workspace-invitatio
 import { IWorkspaceService } from '../common/interfaces/workspace.service.interface';
 import { USER_SERVICE } from '@api/modules/user/common/constants/user.list.constant';
 import { IUserService } from '@api/modules/user/common/interfaces/user.service.interface';
-import { UserDocument } from '@api/modules/user/schemas/user.schema';
+import { UserDocument } from '@api/modules/user/models/user.schema';
 import { INVITATION_STATUS } from '@api/common/constants/common';
 import { ConfigService } from '@nestjs/config';
 import { HelperHashService } from '@core/utils/helper/service/helper.hash.service';

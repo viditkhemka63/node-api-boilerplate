@@ -1,3 +1,4 @@
+import { STATUS } from '@api/common/constants/common';
 import { ApiHideProperty } from '@nestjs/swagger';
 import { PaginationListAbstract } from '@core/pagination/abstracts/pagination.abstract';
 import {
@@ -8,6 +9,7 @@ import {
   PaginationPerPage,
   PaginationSearch,
   PaginationSort,
+  PaginationStatusFilter,
 } from '@core/pagination/decorators/pagination.decorator';
 import { IPaginationSort } from '@core/pagination/interfaces/pagination.interface';
 import {
@@ -40,6 +42,6 @@ export class PermissionListDto implements PaginationListAbstract {
   @PaginationAvailableSort(PERMISSION_DEFAULT_AVAILABLE_SORT)
   readonly availableSort: string[];
 
-  @PaginationFilterBoolean(PERMISSION_DEFAULT_ACTIVE)
-  readonly isActive: boolean[];
+  @PaginationStatusFilter(STATUS['ACTIVE'])
+  readonly status: string;
 }

@@ -7,7 +7,7 @@ import { Model } from 'mongoose';
 import {
   PermissionDocument,
   PermissionEntity,
-} from '../schemas/permission.schema';
+} from '../models/permission.schema';
 
 @Injectable()
 export class PermissionBulkRepository

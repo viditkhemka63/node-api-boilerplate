@@ -5,6 +5,8 @@ import { MONGOOSE, SEQUELIZE } from '@api/common/constants/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MigrationModule } from './migrations/migration.module';
 
+const URI = 'mongodb://localhost:27017/saas';
+
 @Module({
   imports: [
     SequelizeModule.forRootAsync({
@@ -14,7 +16,7 @@ import { MigrationModule } from './migrations/migration.module';
     }),
     MongooseModule.forRootAsync({
       useFactory: async () => ({
-        uri: databaseProviders[MONGOOSE](),
+        uri: URI,
       }),
     }),
     MigrationModule,

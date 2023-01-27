@@ -24,7 +24,7 @@ export class UserEntity {
     unique: true,
     trim: true,
   })
-  mobileNumber: string;
+  mobile: string;
 
   @Prop({
     required: true,

@@ -8,7 +8,7 @@ import {
 } from '../schemas/workspace-users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { WorkspaceEntity } from '../schemas/workspace.schema';
-import { UserRoleEntity } from '@api/modules/user-role/schemas/user-role.schema';
+import { UserRoleEntity } from '@api/modules/user-role/models/user-role.schema';
 
 @Injectable()
 export class WorkspaceUsersRepository

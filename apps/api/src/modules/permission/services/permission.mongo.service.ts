@@ -10,16 +10,17 @@ import {
 import {
   PermissionDocument,
   PermissionEntity,
-} from '../schemas/permission.schema';
+} from '../models/permission.schema';
 import { PermissionUpdateDto } from '@api/modules/permission/common/dto/permission.update.dto';
 import { PermissionActiveDto } from '@api/modules/permission/common/dto/permission.active.dto';
 import { PermissionCreateDto } from '@api/modules/permission/common/dto/permission.create.dto';
 import { PaginationService } from '@core/pagination/service/pagination.service';
 import { PermissionListDto } from '@api/modules/permission/common/dto/permission.list.dto';
 import { IPermissionService } from '@api/modules/permission/common/interfaces/permission.service.interface';
+import { STATUS } from '@api/common/constants/user.constant';
 
 @Injectable()
-export class PermissionService implements IPermissionService {
+export class PermissionServiceMongo implements IPermissionService {
   constructor(
     private readonly permissionRepository: PermissionRepository,
     private readonly paginationService: PaginationService
@@ -32,15 +33,15 @@ export class PermissionService implements IPermissionService {
     search,
     availableSort,
     availableSearch,
-    isActive,
+    status,
   }: PermissionListDto) {
     const skip: number = await this.paginationService.skip(page, perPage);
     const find: Record<string, any> = {
-      isActive: {
-        $in: isActive,
-      },
+      status,
       ...search,
     };
+
+    console.log('IN mongodb service');
 
     const permissions: PermissionDocument[] =
       await this.permissionRepository.findAll<PermissionDocument>(find, {
@@ -103,7 +104,7 @@ export class PermissionService implements IPermissionService {
   ): Promise<PermissionDocument> {
     const create: PermissionEntity = {
       ...data,
-      isActive: true,
+      status: STATUS['ACTIVE'],
     };
 
     return this.permissionRepository.create<PermissionEntity>(create, options);
@@ -126,7 +127,7 @@ export class PermissionService implements IPermissionService {
     options?: IDatabaseOptions
   ): Promise<PermissionDocument> {
     const update: PermissionActiveDto = {
-      isActive: false,
+      status: STATUS['INACTIVE'],
     };
 
     return this.permissionRepository.updateOneById<PermissionActiveDto>(
@@ -141,7 +142,7 @@ export class PermissionService implements IPermissionService {
     options?: IDatabaseOptions
   ): Promise<PermissionDocument> {
     const update: PermissionActiveDto = {
-      isActive: true,
+      status: STATUS['ACTIVE'],
     };
 
     return this.permissionRepository.updateOneById<PermissionActiveDto>(
