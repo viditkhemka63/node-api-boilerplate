@@ -54,7 +54,7 @@
 - [ ] Husky GitHook For Check Source Code, and Run Test Before Commit 🐶
 - [ ] Support CI/CD with Github Action or Jenkins
 - [ ] Support Docker Installation
-- [ ]
+- [ ] Cache using redis
 
 ## Project Architecure
 
